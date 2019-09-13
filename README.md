@@ -5,17 +5,17 @@ Elvis Sahlén &amp; Luna Lindh's Lab4
 * Properties should always be private when possible. Use get, set
 
 class Player
-    - Inventory
+    * Inventory
 
 abstract class MapTile
-  subclasses:
-      Room (.)
-      Door (D)
-      Wall (#)
+  * subclasses:
+      * Room (.)
+      * Door (D)
+      * Wall (#)
     
 abstract class Item
-  subclasses:
-    Key (K)
+  * subclasses:
+    * Key (K)
 
 interface IMapSymbol
   * Interface for all classes that are represented as a symbol on the map

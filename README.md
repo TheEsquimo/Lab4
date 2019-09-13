@@ -53,4 +53,7 @@ Console.BackgroundColor, Console.ForegroundColor, Console.ResetColor
     * Hit-point battles
     * Invisible rooms that doesn't reveal what's inside before the player enters
     
-
+=====FRÅGOR TILL PONTUS=====
+* Bör man inte göra kartan som en tvådimensionell array av MapTile-objekt som sen representeras som chars?
+* Är det rimligt att ha inventorysystemet som en del av spelarklassen, eller bör det vara sin egna separata del?
+* Angående interface, är det okej att göra ett interface som implementeras i alla klasser som ska representeras som en char på kartan, där interfacets enda funktion är att spara ett fält för vilken char det ska vara?

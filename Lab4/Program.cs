@@ -4,6 +4,7 @@ namespace Lab4
 {
     class Program
     {
+        LevelMap levelMap = new LevelMap();
         /*
         public static int playerPosX = 2;
         public static int playerPosY = 2;

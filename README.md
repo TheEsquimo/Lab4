@@ -18,6 +18,7 @@ abstract class Item
     * Key (K)
     
 class LevelMap
+   * 
 
 interface IMapSymbol
   * Interface for all classes that are represented as a symbol on the map

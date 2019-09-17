@@ -4,107 +4,45 @@ namespace Lab4
 {
     class Program
     {
-        LevelMap levelMap = new LevelMap();
-        /*
-        public static int playerPosX = 2;
-        public static int playerPosY = 2;
-
-        public static char[,] worldMap = new char[,]
-        {
-                {'#', '#', '#', '#', '#', '#' },
-                {'#', '.', '.', '.', '.', '#' },
-                {'#', '.', '@', '#', '.', '#' },
-                {'#', '.', '.', '.', '.', '#' },
-                {'#', '#', '#', '#', '#', '.' },
-        };
-
         static void Main(string[] args)
         {
-            while (true)
+            char[,] charMap = new char[,]
             {
-                Console.Clear();
+                {'K', '#', '#', '#', '#', '#' },
+                {'#', '.', '#', 'E', '.', '#' },
+                {'#', '.', '@', '#', 'D', '#' },
+                {'#', '.', '.', '.', '.', '#' },
+                {'#', '.', '.', '.', '.', '#' },
+                {'#', '#', '#', '#', '#', '#' }
+            };
 
-                Console.WriteLine($"X: {playerPosX}");
-                Console.WriteLine($"Y: {playerPosY}");
+            LevelMap level = new LevelMap();
+            level.MapGeneration(charMap);
 
-                //Display map
-                for (int row = 0; row < worldMap.GetLength(0); row++)
+            RoomTile roomTile = (RoomTile)level.Map[0, 0];
+            Console.WriteLine("Keys in room: " + roomTile.Keys);
+
+            //Show map as object types
+            for (int row = 0; row < level.Map.GetLength(0); row++)
+            {
+                for (int column = 0; column < level.Map.GetLength(1); column++)
                 {
-                    for (int column = 0; column < worldMap.GetLength(1); column++)
-                    {
-                        Console.Write(worldMap[row, column]);
-                    }
-                    Console.WriteLine();
+                    Console.Write(level.Map[row, column].GetType() + " ");
                 }
-
-                //Player movement
-                TryPlayerMove();
+                Console.WriteLine();
             }
-        }
 
-        private static void MovePlayer(string input)
-        {
-            worldMap[playerPosY, playerPosX] = '.';
-
-            switch (input)
+            //Show map as chars
+            for (int row = 0; row < charMap.GetLength(0); row++)
             {
-                case "w":
-                    --playerPosY;
-                    break;
-
-                case "a":
-                    --playerPosX;
-                    break;
-
-                case "s":
-                    ++playerPosY;
-                    break;
-
-                case "d":
-                    ++playerPosX;
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid input. How did it pass the TryPlayerMove?");
-                    break;
+                for (int column = 0; column < charMap.GetLength(1); column++)
+                {
+                    Console.Write(charMap[row, column]);
+                }
+                Console.WriteLine();
             }
 
-            worldMap[playerPosY, playerPosX] = '@';
+            Console.ReadKey();
         }
-
-        private static void TryPlayerMove()
-        {
-            string userInput = "";
-            userInput = Console.ReadLine();
-            userInput = userInput.ToLower();
-            switch (userInput)
-            {
-                case "w":
-                    if (worldMap[playerPosY, playerPosX - 1] == '#') { return; }
-                    else { MovePlayer(userInput); }
-                    break;
-
-                case "a":
-                    if (worldMap[playerPosY - 1, playerPosX] == '#') { return; }
-                    else { MovePlayer(userInput); }
-                    break;
-
-                case "s":
-                    if (worldMap[playerPosY, playerPosX + 1] == '#') { return; }
-                    else { MovePlayer(userInput); }
-                    break;
-
-                case "d":
-                    if (worldMap[playerPosY + 1, playerPosX] == '#') { return; }
-                    else { MovePlayer(userInput); }
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid input, try again");
-                    TryPlayerMove();
-                    break;
-            }
-        }
-        */
     }
 }

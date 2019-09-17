@@ -2,22 +2,19 @@
 {
     class LevelMap
     {
-        public static char[,] charMap = new char[,]
-        {
-                {'#', '#', '#', '#', '#', '#' },
-                {'#', '.', '.', '.', '.', '#' },
-                {'#', '.', '@', '#', '.', '#' },
-                {'#', '.', '.', '.', '.', '#' },
-                {'#', '#', '#', '#', '#', '.' },
-        };
+        private MapTile[,] map;
 
-        public static MapTile[,] levelMap;
+        public MapTile[,] Map
+        {
+            get { return map; }
+        }
 
         public void MapGeneration(char[,] charMap)
         {
+            //Creates MapTile objects to store in 2D array based on chars in other 2D array
             int mapSizeX = charMap.GetLength(0);
             int mapSizeY = charMap.GetLength(1);
-            levelMap = new MapTile[mapSizeX, mapSizeY];
+            map = new MapTile[mapSizeX, mapSizeY];
 
             for (int row = 0; row < mapSizeY; row++)
             {
@@ -34,19 +31,34 @@
                             generatedTile = new RoomTile();
                             break;
 
-                        case 'k':
-                            generatedTile = new RoomTile();
-                            generatedTile.Keys = 1; //Lös det här!
+                        case 'D':
+                            generatedTile = new DoorTile();
                             break;
 
-                        case 'm':
+                        case 'E':
+                            RoomTile roomExit = new RoomTile();
+                            roomExit.Exit = true;
+                            generatedTile = roomExit;
+                            break;
 
+                        case 'K':
+                            RoomTile roomWithKey = new RoomTile();
+                            roomWithKey.Keys = 1;
+                            generatedTile = roomWithKey;
+                            break;
+
+                        case 'M':
+                            RoomTile roomWithMonster = new RoomTile();
+                            roomWithMonster.Monster = true;
+                            generatedTile = roomWithMonster;
                             break;
 
                         default:
-
+                            generatedTile = new RoomTile();
                             break;
                     }
+
+                    map[row, column] = generatedTile;
                 }
             }
         }

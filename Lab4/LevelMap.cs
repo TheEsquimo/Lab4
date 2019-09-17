@@ -36,7 +36,6 @@
 
                         case 'k':
                             generatedTile = new RoomTile();
-                            RoomTile roomTile = new RoomTile();
                             generatedTile.Keys = 1; //Lös det här!
                             break;
 

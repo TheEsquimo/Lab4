@@ -23,19 +23,21 @@
             {
                 for (int column = 0; column < mapSizeX; column++)
                 {
-                    //Switch that makes objects based on characters
+                    MapTile generatedTile;
                     switch (charMap[row, column])
                     {
                         case '#':
-
+                            generatedTile = new WallTile();
                             break;
 
                         case '.':
-
+                            generatedTile = new RoomTile();
                             break;
 
                         case 'k':
-
+                            generatedTile = new RoomTile();
+                            RoomTile roomTile = new RoomTile();
+                            generatedTile.Keys = 1; //Lös det här!
                             break;
 
                         case 'm':

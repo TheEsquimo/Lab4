@@ -20,9 +20,8 @@ abstract class Item
 class LevelMap
    * 
 
-interface IMapSymbol
-  * Interface for all classes that are represented as a symbol on the map
-      - Contains string property to store symbol
+interface ISomeInterface
+   * Come up with a reasonable use of an interface
    
    
 =====MAP SYSTEM=====

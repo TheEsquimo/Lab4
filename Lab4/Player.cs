@@ -6,7 +6,7 @@
         int playerPositionY;
         int movesLeft;
         int maxMoves;
-        //List<Item> inventory = new List<Item>(); //Can't make list right now
+        int keys = 0;
 
         public Player(int moves)
         {
@@ -26,40 +26,65 @@
             set { playerPositionY = value; }
         }
 
-        public void Move(string userInput)
+        public void Move(char userInput, LevelMap level)
         {
-            // 1 = right/up 
-            // -1 = left/down
-            int checkHorizontal = 0;
-            int checkVertical = 0;
+            // 1 = right/down 
+            // -1 = left/up
+            int horizontalDirection = 0;
+            int verticalDirection = 0;
 
             switch (userInput)
             {
-                case "w":
-                    checkVertical = 1;
+                case 'w':
+                    verticalDirection = -1;
                     break;
 
-                case "s":
-                    checkVertical = -1;
+                case 's':
+                    verticalDirection = 1;
                     break;
 
-                case "a":
-                    checkHorizontal = -1;
+                case 'a':
+                    horizontalDirection = -1;
                     break;
 
-                case "d":
-                    checkHorizontal = 1;
+                case 'd':
+                    horizontalDirection = 1;
                     break;
             }
 
-            if (CanMove(checkHorizontal, checkVertical))
+            if (CanMove(horizontalDirection, verticalDirection, level))
             {
+                level.Map[playerPositionY, playerPositionX].PlayerOnTile = false;
+                playerPositionX += horizontalDirection;
+                playerPositionY += verticalDirection;
+                MapTile currentTile = level.Map[playerPositionY, playerPositionX];
+                currentTile.PlayerOnTile = true;
 
+                keys += currentTile.Keys;
+                currentTile.Keys = 0;
+
+                if (currentTile is DoorTile)
+                {
+                    keys--;
+                    currentTile.Enterable = true;
+                }
             }
         }
 
-        private bool CanMove(int horizontalDirection, int verticalDirection)
+        private bool CanMove(int horizontalDirection, int verticalDirection, LevelMap level)
         {
+            MapTile tileToCheck = level.Map[playerPositionY + verticalDirection, playerPositionX + horizontalDirection];
+            if (tileToCheck.Enterable)
+            {
+                return true;
+            }
+            else if (tileToCheck is DoorTile)
+            {
+                if (keys > 0)
+                {
+                    return true;
+                }
+            }
 
             return false;
         }

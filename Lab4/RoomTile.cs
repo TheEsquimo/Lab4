@@ -8,6 +8,7 @@ namespace Lab4
         private int superKeys = 0;
         private bool monster = false;
         private bool exit = false;
+        private bool enterable = true;
         private char visualRepresentationSymbol;
 
         override public char VisualRepresentationSymbol
@@ -29,7 +30,7 @@ namespace Lab4
             else { visualRepresentationSymbol = '.'; }
         }
 
-        public int Keys
+        override public int Keys
         {
             get { return keys; }
             set { keys = value; }
@@ -51,6 +52,11 @@ namespace Lab4
         {
             get { return exit; }
             set { exit = value; }
+        }
+
+        override public bool Enterable
+        {
+            get { return enterable; }
         }
     }
 }

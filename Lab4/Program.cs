@@ -16,10 +16,12 @@ namespace Lab4
                 {'#', '#', '#', '#', '#', '#' }
             };
 
-            Player player = new Player();
+            const int playerMoves = 10;
+            Player player = new Player(playerMoves);
             LevelMap level = new LevelMap();
             level.MapGeneration(charMap, player);
 
+            //Checks that MapGeneration works correctly
             RoomTile roomTile = (RoomTile)level.Map[0, 0];
             Console.WriteLine("Keys in room: " + roomTile.Keys);
 

@@ -11,7 +11,7 @@
 
         public void MapGeneration(char[,] charMap)
         {
-            //Creates MapTile objects to store in 2D array based on chars in other 2D array
+            //Creates MapTile objects and stores in 2D array based on chars in parameter 2D array
             int mapSizeX = charMap.GetLength(0);
             int mapSizeY = charMap.GetLength(1);
             map = new MapTile[mapSizeX, mapSizeY];

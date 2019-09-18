@@ -28,14 +28,39 @@
 
         public void Move(string userInput)
         {
-            if (CanMove(userInput))
+            // 1 = right/up 
+            // -1 = left/down
+            int checkHorizontal = 0;
+            int checkVertical = 0;
+
+            switch (userInput)
+            {
+                case "w":
+                    checkVertical = 1;
+                    break;
+
+                case "s":
+                    checkVertical = -1;
+                    break;
+
+                case "a":
+                    checkHorizontal = -1;
+                    break;
+
+                case "d":
+                    checkHorizontal = 1;
+                    break;
+            }
+
+            if (CanMove(checkHorizontal, checkVertical))
             {
 
             }
         }
 
-        private bool CanMove(string userInput)
+        private bool CanMove(int horizontalDirection, int verticalDirection)
         {
+
             return false;
         }
     }

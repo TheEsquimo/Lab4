@@ -1,4 +1,6 @@
-﻿namespace Lab4
+﻿using System;
+
+namespace Lab4
 {
     class LevelMap
     {
@@ -33,6 +35,7 @@
 
                         case '@':
                             generatedTile = new RoomTile();
+                            generatedTile.PlayerOnTile = true;
                             player.PlayerPositionX = column;
                             player.PlayerPositionY = row;
                             break;
@@ -71,7 +74,14 @@
 
         public void PrintMap()
         {
-
+            for (int row = 0; row < map.GetLength(0); row++)
+            {
+                for (int column = 0; column < map.GetLength(1); column++)
+                {
+                     Console.Write(map[row, column].VisualRepresentationSymbol);
+                }
+                Console.WriteLine();
+            }
         }
     }
 }

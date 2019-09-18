@@ -45,6 +45,8 @@ namespace Lab4
                 Console.WriteLine();
             }
 
+            level.PrintMap();
+
             Console.ReadKey();
         }
     }

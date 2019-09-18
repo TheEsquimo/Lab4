@@ -14,9 +14,9 @@ namespace Lab4
         public void MapGeneration(char[,] charMap, Player player)
         {
             //Creates MapTile objects and stores them in 2D array based on chars in parameter 2D array
-            int mapSizeX = charMap.GetLength(0);
-            int mapSizeY = charMap.GetLength(1);
-            map = new MapTile[mapSizeX, mapSizeY];
+            int mapSizeY = charMap.GetLength(0);
+            int mapSizeX = charMap.GetLength(1);
+            map = new MapTile[mapSizeY, mapSizeX];
 
             for (int row = 0; row < mapSizeY; row++)
             {

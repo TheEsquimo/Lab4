@@ -9,9 +9,9 @@
             get { return map; }
         }
 
-        public void MapGeneration(char[,] charMap)
+        public void MapGeneration(char[,] charMap, Player player)
         {
-            //Creates MapTile objects to store in 2D array based on chars in other 2D array
+            //Creates MapTile objects and stores them in 2D array based on chars in parameter 2D array
             int mapSizeX = charMap.GetLength(0);
             int mapSizeY = charMap.GetLength(1);
             map = new MapTile[mapSizeX, mapSizeY];
@@ -29,6 +29,12 @@
 
                         case '.':
                             generatedTile = new RoomTile();
+                            break;
+
+                        case '@':
+                            generatedTile = new RoomTile();
+                            player.PlayerPositionX = column;
+                            player.PlayerPositionY = row;
                             break;
 
                         case 'D':

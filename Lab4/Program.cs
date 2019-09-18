@@ -16,13 +16,14 @@ namespace Lab4
                 {'#', '#', '#', '#', '#', '#' }
             };
 
+            Player player = new Player();
             LevelMap level = new LevelMap();
-            level.MapGeneration(charMap);
+            level.MapGeneration(charMap, player);
 
             RoomTile roomTile = (RoomTile)level.Map[0, 0];
             Console.WriteLine("Keys in room: " + roomTile.Keys);
 
-            //Show map as object types
+            //Print map as object types
             for (int row = 0; row < level.Map.GetLength(0); row++)
             {
                 for (int column = 0; column < level.Map.GetLength(1); column++)
@@ -32,7 +33,7 @@ namespace Lab4
                 Console.WriteLine();
             }
 
-            //Show map as chars
+            //Print map as chars
             for (int row = 0; row < charMap.GetLength(0); row++)
             {
                 for (int column = 0; column < charMap.GetLength(1); column++)

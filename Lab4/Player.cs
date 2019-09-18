@@ -6,12 +6,6 @@
         int playerPositionY;
         //List<Item> inventory = new List<Item>(); //Can't make list right now
 
-        public Player(int startPositionX, int startPositionY)
-        {
-            playerPositionX = startPositionX;
-            playerPositionY = startPositionY;
-        }
-
         public int PlayerPositionX
         {
             get { return playerPositionX; }

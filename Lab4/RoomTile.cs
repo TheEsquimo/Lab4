@@ -10,20 +10,20 @@ namespace Lab4
         private bool exit = false;
         private char visualRepresentationSymbol;
 
-        public char VisualRepresentationSymbol
+        override public char VisualRepresentationSymbol
         {
             get
             {
                 UpdateVisualRepresentationSymbol();
                 return visualRepresentationSymbol;
             }
-            set { visualRepresentationSymbol = value; }
         }
 
         private void UpdateVisualRepresentationSymbol()
         {
-            if (Exit) { visualRepresentationSymbol = 'E'; }
-            else if (Monster) { visualRepresentationSymbol = 'M'; }
+            if (PlayerOnTile) { visualRepresentationSymbol = '@'; }
+            else if (exit) { visualRepresentationSymbol = 'E'; }
+            else if (monster) { visualRepresentationSymbol = 'M'; }
             else if (superKeys > 0) { visualRepresentationSymbol = 'S'; }
             else if (keys > 0) { visualRepresentationSymbol = 'K'; }
             else { visualRepresentationSymbol = '.'; }

@@ -1,6 +1,6 @@
 ﻿namespace Lab4
 {
-    class DoorTile : MapTile, IVisible
+    class DoorTile : MapTile
     {
         private char visualRepresentationSymbol = 'D';
         private bool enterable = false;

@@ -1,6 +1,6 @@
 ﻿namespace Lab4
 {
-    class WallTile : MapTile, IVisible
+    class WallTile : MapTile
     {
         private char visualRepresentationSymbol = '#';
         private bool enterable = false;

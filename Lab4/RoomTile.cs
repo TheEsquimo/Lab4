@@ -2,7 +2,7 @@
 
 namespace Lab4
 {
-    class RoomTile : MapTile, IVisible
+    class RoomTile : MapTile
     {
         private int keys = 0;
         private int superKeys = 0;

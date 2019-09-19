@@ -20,7 +20,7 @@
             }
         }
 
-        public bool Visible
+        override public bool Visible
         {
             get { return visible; }
             set { visible = value; }

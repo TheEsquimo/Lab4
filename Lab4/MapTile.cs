@@ -5,7 +5,7 @@
         private char visualRepresentationSymbol;
         private bool playerOnTile = false;
         private bool enterable = false;
-        private bool visible = true;
+        private bool visible = false;
         private int keys = 0;
 
         virtual public bool Visible

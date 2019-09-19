@@ -4,7 +4,7 @@
     {
         private char visualRepresentationSymbol = 'D';
         private bool enterable = false;
-        private bool visible = true;
+        private bool visible = false;
 
         override public bool Enterable
         {

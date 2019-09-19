@@ -24,6 +24,7 @@ namespace Lab4
             {
                 Player player = new Player(playerMoves);
                 level.MapGeneration(charMap, player);
+                player.UpdateVision(level);
 
                 //Print map as object types
                 for (int row = 0; row < level.Map.GetLength(0); row++)

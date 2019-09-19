@@ -26,6 +26,7 @@ namespace Lab4
                 level.MapGeneration(charMap, player);
                 player.UpdateVision(level);
 
+                /*
                 //Print map as object types
                 for (int row = 0; row < level.Map.GetLength(0); row++)
                 {
@@ -35,6 +36,7 @@ namespace Lab4
                     }
                     Console.WriteLine();
                 }
+                */
 
                 while (player.MovesLeft > 0)
                 {

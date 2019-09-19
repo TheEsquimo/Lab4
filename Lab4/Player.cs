@@ -17,6 +17,7 @@
         public int MovesLeft
         {
             get { return movesLeft; }
+            set { movesLeft = value; }
         }
 
         public int PlayerPositionHorizontally
@@ -74,13 +75,17 @@
                         roomTile.Monster = false;
                     }
                 }
+
                 keys += currentTile.Keys;
                 currentTile.Keys = 0;
                 
                 if (currentTile is DoorTile)
                 {
-                    keys--;
-                    currentTile.Enterable = true;
+                    if (keys > 0 && !currentTile.Enterable)
+                    {
+                        keys--;
+                        currentTile.Enterable = true;
+                    }
                 }
             }
         }

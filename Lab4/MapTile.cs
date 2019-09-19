@@ -8,7 +8,7 @@
         private bool visible = true;
         private int keys = 0;
 
-        public bool Visible
+        virtual public bool Visible
         {
             get { return visible; }
             set { visible = value; }

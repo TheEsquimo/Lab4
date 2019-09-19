@@ -2,11 +2,11 @@
 {
     abstract class MapTile
     {
-        private char visualRepresentationSymbol;
-        private bool playerOnTile = false;
-        private bool enterable = false;
-        private bool visible = true;
-        private int keys = 0;
+        protected char visualRepresentationSymbol;
+        protected bool playerOnTile = false;
+        protected bool enterable = false;
+        protected bool visible = false;
+        protected int keys = 0;
 
         virtual public bool Visible
         {

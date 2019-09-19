@@ -1,9 +1,10 @@
 ﻿namespace Lab4
 {
-    class WallTile : MapTile
+    class WallTile : MapTile, IVisible
     {
         private char visualRepresentationSymbol = '#';
         private bool enterable = false;
+        private bool visible = true;
 
         override public bool Enterable
         {
@@ -12,7 +13,17 @@
 
         override public char VisualRepresentationSymbol
         {
-            get { return visualRepresentationSymbol; }
+            get
+            {
+                if (visible) { return visualRepresentationSymbol; }
+                else { return ' '; }
+            }
+        }
+
+        public bool Visible
+        {
+            get { return visible; }
+            set { visible = value; }
         }
     }
 }

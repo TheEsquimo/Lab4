@@ -2,8 +2,8 @@
 {
     class Player
     {
-        int playerPositionX;
-        int playerPositionY;
+        int playerPositionHorizontally;
+        int playerPositionVertically;
         int movesLeft;
         int maxMoves;
         int keys = 0;
@@ -14,16 +14,16 @@
             movesLeft = maxMoves;
         }
 
-        public int PlayerPositionX
+        public int PlayerPositionHorizontally
         {
-            get { return playerPositionX; }
-            set { playerPositionX = value; }
+            get { return playerPositionHorizontally; }
+            set { playerPositionHorizontally = value; }
         }
 
-        public int PlayerPositionY
+        public int PlayerPositionVertically
         {
-            get { return playerPositionY; }
-            set { playerPositionY = value; }
+            get { return playerPositionVertically; }
+            set { playerPositionVertically = value; }
         }
 
         public void Move(char userInput, LevelMap level)
@@ -54,10 +54,10 @@
 
             if (CanMove(horizontalDirection, verticalDirection, level))
             {
-                level.Map[playerPositionY, playerPositionX].PlayerOnTile = false;
-                playerPositionX += horizontalDirection;
-                playerPositionY += verticalDirection;
-                MapTile currentTile = level.Map[playerPositionY, playerPositionX];
+                level.Map[playerPositionVertically, playerPositionHorizontally].PlayerOnTile = false;
+                playerPositionHorizontally += horizontalDirection;
+                playerPositionVertically += verticalDirection;
+                MapTile currentTile = level.Map[playerPositionVertically, playerPositionHorizontally];
                 currentTile.PlayerOnTile = true;
 
                 keys += currentTile.Keys;
@@ -73,7 +73,7 @@
 
         private bool CanMove(int horizontalDirection, int verticalDirection, LevelMap level)
         {
-            MapTile tileToCheck = level.Map[playerPositionY + verticalDirection, playerPositionX + horizontalDirection];
+            MapTile tileToCheck = level.Map[playerPositionVertically + verticalDirection, playerPositionHorizontally + horizontalDirection];
             if (tileToCheck.Enterable)
             {
                 return true;

@@ -43,6 +43,7 @@ namespace Lab4
             {
                 Console.Clear();
                 level.PrintMap();
+                player.DisplayStats();
 
                 char userInput = Console.ReadKey().KeyChar;
                 player.Move(userInput, level);

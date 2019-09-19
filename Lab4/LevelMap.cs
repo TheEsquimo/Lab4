@@ -18,6 +18,7 @@ namespace Lab4
             int mapSizeX = charMap.GetLength(1);
             map = new MapTile[mapSizeY, mapSizeX];
 
+
             for (int row = 0; row < mapSizeY; row++)
             {
                 for (int column = 0; column < mapSizeX; column++)

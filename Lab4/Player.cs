@@ -14,6 +14,11 @@
             movesLeft = maxMoves;
         }
 
+        public int MovesLeft
+        {
+            get { return movesLeft; }
+        }
+
         public int PlayerPositionHorizontally
         {
             get { return playerPositionHorizontally; }
@@ -59,10 +64,19 @@
                 playerPositionVertically += verticalDirection;
                 MapTile currentTile = level.Map[playerPositionVertically, playerPositionHorizontally];
                 currentTile.PlayerOnTile = true;
-
+                movesLeft --;
+                if(currentTile is RoomTile)
+                {
+                    RoomTile roomTile = (RoomTile)currentTile;
+                    if(roomTile.Monster)
+                    {
+                        movesLeft--;
+                        roomTile.Monster = false;
+                    }
+                }
                 keys += currentTile.Keys;
                 currentTile.Keys = 0;
-
+                
                 if (currentTile is DoorTile)
                 {
                     keys--;
@@ -87,6 +101,12 @@
             }
 
             return false;
+        }
+
+        public void DisplayStats()
+        {
+            System.Console.WriteLine("\nMoves left: " + movesLeft + 
+                                     "\nKeys left: " + keys);
         }
     }
 }

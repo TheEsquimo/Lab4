@@ -36,8 +36,8 @@ namespace Lab4
                         case '@':
                             generatedTile = new RoomTile();
                             generatedTile.PlayerOnTile = true;
-                            player.PlayerPositionX = column;
-                            player.PlayerPositionY = row;
+                            player.PlayerPositionHorizontally = column;
+                            player.PlayerPositionVertically = row;
                             break;
 
                         case 'D':
@@ -78,6 +78,7 @@ namespace Lab4
             {
                 for (int column = 0; column < map.GetLength(1); column++)
                 {
+
                      Console.Write(map[row, column].VisualRepresentationSymbol);
                 }
                 Console.WriteLine();

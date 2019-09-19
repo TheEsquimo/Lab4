@@ -1,17 +1,26 @@
 ﻿namespace Lab4
 {
-    abstract class MapTile
+    abstract class MapTile : IVisible
     {
         private char visualRepresentationSymbol;
         private bool playerOnTile = false;
         private bool enterable = false;
+        private bool visible = true;
         private int keys = 0;
 
-        public bool visible = false;
+        public bool Visible
+        {
+            get { return visible; }
+            set { visible = value; }
+        }
         
         virtual public char VisualRepresentationSymbol
         {
-            get { return visualRepresentationSymbol; }
+            get
+            {
+                if (visible) { return visualRepresentationSymbol; }
+                else { return ' '; }
+            }
         }
 
         public bool PlayerOnTile

@@ -1,4 +1,6 @@
-﻿namespace Lab4
+﻿using System;
+
+namespace Lab4
 {
     class Player
     {
@@ -66,7 +68,11 @@
                 MapTile currentTile = level.Map[playerPositionVertically, playerPositionHorizontally];
                 currentTile.PlayerOnTile = true;
                 movesLeft --;
-                if(currentTile is RoomTile)
+
+                keys += currentTile.Keys;
+                currentTile.Keys = 0;
+
+                if (currentTile is RoomTile)
                 {
                     RoomTile roomTile = (RoomTile)currentTile;
                     if(roomTile.Monster)
@@ -75,9 +81,6 @@
                         roomTile.Monster = false;
                     }
                 }
-
-                keys += currentTile.Keys;
-                currentTile.Keys = 0;
                 
                 if (currentTile is DoorTile)
                 {
@@ -87,7 +90,23 @@
                         currentTile.Enterable = true;
                     }
                 }
+
+                UpdateVision(level);
             }
+        }
+
+        public void UpdateVision(LevelMap level)
+        {
+            //Reveals tiles on and around player's current position
+            level.Map[playerPositionVertically, playerPositionHorizontally].Visible = true;
+            level.Map[playerPositionVertically - 1, playerPositionHorizontally].Visible = true;
+            level.Map[playerPositionVertically + 1, playerPositionHorizontally].Visible = true;
+            level.Map[playerPositionVertically, playerPositionHorizontally - 1].Visible = true;
+            level.Map[playerPositionVertically, playerPositionHorizontally + 1].Visible = true;
+            level.Map[playerPositionVertically - 1, playerPositionHorizontally - 1].Visible = true;
+            level.Map[playerPositionVertically - 1, playerPositionHorizontally + 1].Visible = true;
+            level.Map[playerPositionVertically + 1, playerPositionHorizontally - 1].Visible = true;
+            level.Map[playerPositionVertically + 1, playerPositionHorizontally + 1].Visible = true;
         }
 
         private bool CanMove(int horizontalDirection, int verticalDirection, LevelMap level)

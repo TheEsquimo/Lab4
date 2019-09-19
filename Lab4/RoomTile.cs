@@ -9,7 +9,7 @@ namespace Lab4
         private bool monster = false;
         private bool exit = false;
         private bool enterable = true;
-        private bool visible = true;
+        private bool visible = false;
         private char visualRepresentationSymbol;
 
         override public char VisualRepresentationSymbol

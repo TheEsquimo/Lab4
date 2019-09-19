@@ -79,7 +79,6 @@ namespace Lab4
             {
                 for (int column = 0; column < map.GetLength(1); column++)
                 {
-
                      Console.Write(map[row, column].VisualRepresentationSymbol);
                 }
                 Console.WriteLine();

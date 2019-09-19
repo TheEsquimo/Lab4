@@ -1,6 +1,6 @@
 ﻿namespace Lab4
 {
-    abstract class MapTile : IVisible
+    abstract class MapTile
     {
         private char visualRepresentationSymbol;
         private bool playerOnTile = false;

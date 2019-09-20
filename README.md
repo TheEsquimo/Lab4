@@ -66,7 +66,7 @@ Console.BackgroundColor, Console.ForegroundColor, Console.ResetColor
    * Weapon: one-use weapon that takes out a monster without taking a movement penalty
    * Gold: gives extra points
    * Extra moves pick-up
-   * Torch: see traps
+   * Torch: see switches
    
 * static class GameController
    * States: win, lose, play (better name?)

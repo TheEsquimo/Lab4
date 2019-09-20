@@ -122,7 +122,7 @@ namespace Lab4
             }
             else if (tileToCheck is DoorTile)
             {
-                if (keys > 0)
+                if (keys > 0) //CHANGE THIS TO NON-LINQ METHOD
                 {
                     return true;
                 }

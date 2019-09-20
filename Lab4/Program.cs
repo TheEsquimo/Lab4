@@ -4,37 +4,58 @@ namespace Lab4
 {
     class Program
     {
+        static char[,] charMap = new char[,]
+        {
+            {'#', '#', '#', '#', '#', '#', '#' },
+            {'#', 'K', '#', 'E', '.', '.', '#' },
+            {'#', '.', '.', '#', 'D', '#', '#' },
+            {'#', '.', '@', '.', '.', '.', '#' },
+            {'#', '.', '.', '.', '.', '.', '#' },
+            {'#', '#', '#', '#', '#', '#', '#' }
+        };
+
+        const int playerMoves = 30;
+        static LevelMap level = new LevelMap();
+
         static void Main(string[] args)
         {
-            char[,] charMap = new char[,]
+            //Game Loop
+            while (true)
             {
-                {'K', '#', '#', '#', '#', '#' },
-                {'#', '.', '#', 'E', '.', '#' },
-                {'#', '.', '@', '#', 'D', '#' },
-                {'#', '.', '.', '.', '.', '#' },
-                {'#', '.', '.', '.', '.', '#' },
-                {'#', '#', '#', '#', '#', '#' }
-            };
+                Player player = new Player(playerMoves);
+                level.MapGeneration(charMap, player);
+                player.UpdateVision(level);
 
-            const int playerMoves = 10;
-            Player player = new Player(playerMoves);
-            LevelMap level = new LevelMap();
-            level.MapGeneration(charMap, player);
-
-            //Checks that MapGeneration works correctly
-            RoomTile roomTile = (RoomTile)level.Map[0, 0];
-            Console.WriteLine("Keys in room: " + roomTile.Keys);
-
-            //Print map as object types
-            for (int row = 0; row < level.Map.GetLength(0); row++)
-            {
-                for (int column = 0; column < level.Map.GetLength(1); column++)
+                /*
+                //Print map as object types
+                for (int row = 0; row < level.Map.GetLength(0); row++)
                 {
-                    Console.Write(level.Map[row, column].GetType() + " ");
+                    for (int column = 0; column < level.Map.GetLength(1); column++)
+                    {
+                        Console.Write(level.Map[row, column].GetType() + " ");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
+                */
+
+                while (player.MovesLeft > 0)
+                {
+                    Console.Clear();
+                    level.PrintMap();
+                    player.DisplayStats();
+
+                    char userInput = Console.ReadKey().KeyChar;
+                    player.Move(userInput, level);
+                }
+
+                Console.Clear();
+
+                Console.WriteLine("Wow, you are mega lose guy!" +
+                    "\nTry again!");
+                Console.ReadKey();
             }
 
+            /*
             //Print map as chars
             for (int row = 0; row < charMap.GetLength(0); row++)
             {
@@ -44,8 +65,7 @@ namespace Lab4
                 }
                 Console.WriteLine();
             }
-
-            Console.ReadKey();
+            */
         }
     }
 }

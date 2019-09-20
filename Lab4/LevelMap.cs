@@ -1,4 +1,6 @@
-﻿namespace Lab4
+﻿using System;
+
+namespace Lab4
 {
     class LevelMap
     {
@@ -12,9 +14,10 @@
         public void MapGeneration(char[,] charMap, Player player)
         {
             //Creates MapTile objects and stores them in 2D array based on chars in parameter 2D array
-            int mapSizeX = charMap.GetLength(0);
-            int mapSizeY = charMap.GetLength(1);
-            map = new MapTile[mapSizeX, mapSizeY];
+            int mapSizeY = charMap.GetLength(0);
+            int mapSizeX = charMap.GetLength(1);
+            map = new MapTile[mapSizeY, mapSizeX];
+
 
             for (int row = 0; row < mapSizeY; row++)
             {
@@ -33,8 +36,9 @@
 
                         case '@':
                             generatedTile = new RoomTile();
-                            player.PlayerPositionX = column;
-                            player.PlayerPositionY = row;
+                            generatedTile.PlayerOnTile = true;
+                            player.PlayerPositionHorizontally = column;
+                            player.PlayerPositionVertically = row;
                             break;
 
                         case 'D':
@@ -71,7 +75,14 @@
 
         public void PrintMap()
         {
-
+            for (int row = 0; row < map.GetLength(0); row++)
+            {
+                for (int column = 0; column < map.GetLength(1); column++)
+                {
+                     Console.Write(map[row, column].VisualRepresentationSymbol);
+                }
+                Console.WriteLine();
+            }
         }
     }
 }

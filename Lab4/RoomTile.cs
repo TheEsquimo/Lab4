@@ -8,28 +8,31 @@ namespace Lab4
         private int superKeys = 0;
         private bool monster = false;
         private bool exit = false;
+        private bool enterable = true;
+        private bool visible = false;
         private char visualRepresentationSymbol;
 
-        public char VisualRepresentationSymbol
+        override public char VisualRepresentationSymbol
         {
             get
             {
                 UpdateVisualRepresentationSymbol();
-                return visualRepresentationSymbol;
+                if (visible) { return visualRepresentationSymbol; }
+                else { return ' '; }
             }
-            set { visualRepresentationSymbol = value; }
         }
 
         private void UpdateVisualRepresentationSymbol()
         {
-            if (Exit) { visualRepresentationSymbol = 'E'; }
-            else if (Monster) { visualRepresentationSymbol = 'M'; }
-            else if (superKeys > 0) { visualRepresentationSymbol = 'S'; }
-            else if (keys > 0) { visualRepresentationSymbol = 'K'; }
-            else { visualRepresentationSymbol = '.'; }
+                if (PlayerOnTile) { visualRepresentationSymbol = '@'; }
+                else if (exit) { visualRepresentationSymbol = 'E'; }
+                else if (monster) { visualRepresentationSymbol = 'M'; }
+                else if (superKeys > 0) { visualRepresentationSymbol = 'S'; }
+                else if (keys > 0) { visualRepresentationSymbol = 'K'; }
+                else { visualRepresentationSymbol = '.'; }
         }
 
-        public int Keys
+        override public int Keys
         {
             get { return keys; }
             set { keys = value; }
@@ -51,6 +54,17 @@ namespace Lab4
         {
             get { return exit; }
             set { exit = value; }
+        }
+
+        override public bool Enterable
+        {
+            get { return enterable; }
+        }
+
+         override public bool Visible
+        {
+            get { return visible; }
+            set { visible = value; }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Lab4
         int maxMoves;
         int keys = 0;
 
-        public Player(int moves)
+        public Player(int moves = 1000)
         {
             maxMoves = moves;
             movesLeft = maxMoves;

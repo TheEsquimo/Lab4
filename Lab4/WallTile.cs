@@ -2,10 +2,10 @@
 {
     class WallTile : MapTile
     {
-        private char visualRepresentationSymbol = '#';
-        private bool enterable = false;
-        private bool visible = false;
-
+        public WallTile()
+        {
+            visualRepresentationSymbol = '#';
+        }
         override public bool Enterable
         {
             get { return enterable; }

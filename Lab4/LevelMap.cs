@@ -46,8 +46,7 @@ namespace Lab4
                             break;
 
                         case 'E':
-                            RoomTile roomExit = new RoomTile();
-                            roomExit.Exit = true;
+                            ExitTile roomExit = new ExitTile();
                             generatedTile = roomExit;
                             break;
 

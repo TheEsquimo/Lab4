@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lab4
 {
@@ -9,6 +10,7 @@ namespace Lab4
         int movesLeft;
         int maxMoves;
         int keys = 0;
+        public List<Item> inventory = new List<Item>();
 
         public Player(int moves = 1000)
         {
@@ -84,29 +86,31 @@ namespace Lab4
                 
                 if (currentTile is DoorTile)
                 {
-                    if (keys > 0 && !currentTile.Enterable)
+                    if (!currentTile.Enterable)
                     {
-                        keys--;
-                        currentTile.Enterable = true;
+                        //Chooses superkey over regular key if available in inventory
+                        bool superKeyFound = false;
+                        foreach (Item item in inventory)
+                        {
+                            if (item is Superkey)
+                            {
+                                superKeyFound = true;
+                                IUsable superKey = (IUsable)item;
+                                superKey.Use(inventory);
+                                currentTile.Enterable = true;
+                                break;
+                            }
+                        }
+                        if (!superKeyFound && keys > 0)
+                        {
+                            keys--;
+                            currentTile.Enterable = true;
+                        }
                     }
                 }
 
                 UpdateVision(level);
             }
-        }
-
-        public void UpdateVision(LevelMap level)
-        {
-            //Reveals tiles on and around player's current position
-            level.Map[playerPositionVertically, playerPositionHorizontally].Visible = true;
-            level.Map[playerPositionVertically - 1, playerPositionHorizontally].Visible = true;
-            level.Map[playerPositionVertically + 1, playerPositionHorizontally].Visible = true;
-            level.Map[playerPositionVertically, playerPositionHorizontally - 1].Visible = true;
-            level.Map[playerPositionVertically, playerPositionHorizontally + 1].Visible = true;
-            level.Map[playerPositionVertically - 1, playerPositionHorizontally - 1].Visible = true;
-            level.Map[playerPositionVertically - 1, playerPositionHorizontally + 1].Visible = true;
-            level.Map[playerPositionVertically + 1, playerPositionHorizontally - 1].Visible = true;
-            level.Map[playerPositionVertically + 1, playerPositionHorizontally + 1].Visible = true;
         }
 
         private bool CanMove(int horizontalDirection, int verticalDirection, LevelMap level)
@@ -122,9 +126,31 @@ namespace Lab4
                 {
                     return true;
                 }
+
+                foreach (Item item in inventory)
+                {
+                    if (item is Superkey)
+                    {
+                        return true;
+                    }
+                }
             }
 
             return false;
+        }
+
+        public void UpdateVision(LevelMap level)
+        {
+            //Reveals tiles on and around player's current position
+            level.Map[playerPositionVertically, playerPositionHorizontally].Visible = true;
+            level.Map[playerPositionVertically - 1, playerPositionHorizontally].Visible = true;
+            level.Map[playerPositionVertically + 1, playerPositionHorizontally].Visible = true;
+            level.Map[playerPositionVertically, playerPositionHorizontally - 1].Visible = true;
+            level.Map[playerPositionVertically, playerPositionHorizontally + 1].Visible = true;
+            level.Map[playerPositionVertically - 1, playerPositionHorizontally - 1].Visible = true;
+            level.Map[playerPositionVertically - 1, playerPositionHorizontally + 1].Visible = true;
+            level.Map[playerPositionVertically + 1, playerPositionHorizontally - 1].Visible = true;
+            level.Map[playerPositionVertically + 1, playerPositionHorizontally + 1].Visible = true;
         }
 
         public void DisplayStats()

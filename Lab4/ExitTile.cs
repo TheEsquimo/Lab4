@@ -6,8 +6,7 @@ namespace Lab4
 {
     class ExitTile : MapTile
     {
-        
-        ExitTile()
+        public ExitTile()
         {
             visible = true;
             enterable = true;

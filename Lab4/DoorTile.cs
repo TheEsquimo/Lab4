@@ -2,7 +2,7 @@
 {
     class DoorTile : MapTile
     {
-        DoorTile()
+        public DoorTile()
         {
             visualRepresentationSymbol = 'D';
         }

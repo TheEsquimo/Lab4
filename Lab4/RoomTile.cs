@@ -7,7 +7,7 @@ namespace Lab4
         private int superKeys = 0;
         private bool monster = false;
         
-        RoomTile()
+        public RoomTile()
         {
             enterable = true;
         }

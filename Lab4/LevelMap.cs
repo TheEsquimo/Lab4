@@ -61,7 +61,16 @@ namespace Lab4
                             roomWithMonster.Monster = true;
                             generatedTile = roomWithMonster;
                             break;
-
+                        case 'T':
+                            RoomTile roomWithTrap = new RoomTile();
+                            roomWithTrap.Trap = true;
+                            generatedTile = roomWithTrap;
+                            break;
+                        case 'S':
+                            RoomTile roomWithTrapSwitch = new RoomTile();
+                            roomWithTrapSwitch.TrapSwitch = true;
+                            generatedTile = roomWithTrapSwitch;
+                            break;
                         default:
                             generatedTile = new RoomTile();
                             break;

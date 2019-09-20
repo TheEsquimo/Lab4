@@ -9,6 +9,7 @@ namespace Lab4
         int movesLeft;
         int maxMoves;
         int keys = 0;
+        const string name = "TrueGuy";
 
         public Player(int moves)
         {
@@ -77,8 +78,19 @@ namespace Lab4
                     RoomTile roomTile = (RoomTile)currentTile;
                     if(roomTile.Monster)
                     {
-                        movesLeft--;
                         roomTile.Monster = false;
+                        movesLeft--;
+                        Console.ReadKey();
+                    }
+                    else if(roomTile.Trap)
+                    {
+                        Console.WriteLine($"\n{name}: 'You're making me me walk on a trap, it costs me 1 extra move! Silly willy...'");
+                        movesLeft--;
+                        Console.ReadKey();
+                    }
+                    else if (roomTile.TrapSwitch)
+                    {
+                        DestroyTraps(level);
                     }
                 }
                 
@@ -98,15 +110,33 @@ namespace Lab4
         public void UpdateVision(LevelMap level)
         {
             //Reveals tiles on and around player's current position
-            level.Map[playerPositionVertically, playerPositionHorizontally].Visible = true;
-            level.Map[playerPositionVertically - 1, playerPositionHorizontally].Visible = true;
-            level.Map[playerPositionVertically + 1, playerPositionHorizontally].Visible = true;
-            level.Map[playerPositionVertically, playerPositionHorizontally - 1].Visible = true;
-            level.Map[playerPositionVertically, playerPositionHorizontally + 1].Visible = true;
-            level.Map[playerPositionVertically - 1, playerPositionHorizontally - 1].Visible = true;
-            level.Map[playerPositionVertically - 1, playerPositionHorizontally + 1].Visible = true;
-            level.Map[playerPositionVertically + 1, playerPositionHorizontally - 1].Visible = true;
-            level.Map[playerPositionVertically + 1, playerPositionHorizontally + 1].Visible = true;
+
+            for (int column = playerPositionVertically - 1; column <= playerPositionVertically + 1; column++)
+            {
+                for(int row = playerPositionHorizontally - 1; row <= playerPositionHorizontally + 1; row++)
+                {
+                    level.Map[column, row].Visible = true;
+                }
+            }
+        }
+
+        public void DestroyTraps(LevelMap level)
+        {
+            for (int column = playerPositionVertically - 1; column <= playerPositionVertically + 1; column++)
+            {
+                for (int row = playerPositionHorizontally - 1; row <= playerPositionHorizontally + 1; row++)
+                {
+                    if (level.Map[column, row] is RoomTile)
+                    {
+                        RoomTile roomTile = (RoomTile)level.Map[column, row];
+                        roomTile.Trap = false;
+                    }
+                }
+            }
+            RoomTile currentRoomTile = (RoomTile)level.Map[playerPositionVertically, playerPositionHorizontally];
+            currentRoomTile.TrapSwitch = false;
+            Console.WriteLine($"{name}: I've destroyed all the nearby traps with this hidden switch that I just found");
+            Console.ReadKey();
         }
 
         private bool CanMove(int horizontalDirection, int verticalDirection, LevelMap level)
@@ -126,6 +156,8 @@ namespace Lab4
 
             return false;
         }
+
+
 
         public void DisplayStats()
         {

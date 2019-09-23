@@ -86,6 +86,12 @@ namespace Lab4
                             generatedTile = roomWithTrapSwitch;
                             break;
 
+                        case 'W':
+                            RoomTile roomWithWeapon = new RoomTile();
+                            roomWithWeapon.Weapon = true;
+                            generatedTile = roomWithWeapon;
+                            break;
+
                         default:
                             generatedTile = new RoomTile();
                             break;

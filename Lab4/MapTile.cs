@@ -24,7 +24,7 @@
 
         public bool PlayerOnTile
         {
-            get {return playerOnTile; }
+            get { return playerOnTile; }
             set { playerOnTile = value; }            
         }
 

@@ -87,70 +87,20 @@ namespace Lab4
                     roomTile.Gold = 0;
                     keys += roomTile.Keys;
                     roomTile.Keys = 0;
-
-                    if (roomTile.Monster)
-                    {
-                        roomTile.Monster = false;
-                        movesLeft--;
-                        Console.WriteLine($"\n{name}: 'I fought a monster, and now I lose a move. Very pain within me...'");
-                        Console.ReadKey();
-                    }
-                    else if(roomTile.Trap)
-                    {
-                        Console.WriteLine($"\n{name}: 'Uh-oh, I have walked upon a spooky trap! It costs me 1 extra move! Silly willy...'");
-                        movesLeft--;
-                        Console.ReadKey();
-                    }
-                    else if (roomTile.TrapSwitch)
-                    {
-                        DestroyTraps(level);
-                    }
-                    else if (roomTile.SuperKey)
-                    {
-                        foreach(Item item in inventory)
-                        {
-                            if (item is Superkey)
-                            {
-                                Superkey thisSuperKey = (Superkey)item;
-                                thisSuperKey.CurrentCharges = 0;
-                                thisSuperKey.Use(inventory);
-                                break;
-                            }
-                        }
-                        Superkey newSuperKey = new Superkey();
-                        inventory.Add(newSuperKey);
-                        roomTile.SuperKey = false;
-                    }
+                    RoomTileEvents(roomTile, level);
                 }
-                
-                if (currentTile is DoorTile)
+                else if (currentTile is DoorTile)
                 {
                     if (!currentTile.Enterable)
                     {
-                        //Chooses superkey over regular key if available in inventory
-                        bool superKeyFound = false;
-                        foreach (Item item in inventory)
-                        {
-                            if (item is Superkey)
-                            {
-                                superKeyFound = true;
-                                IUsable superKey = (IUsable)item;
-                                superKey.Use(inventory);
-                                currentTile.Enterable = true;
-                                break;
-                            }
-                        }
-                        if (!superKeyFound && keys > 0)
-                        {
-                            keys--;
-                            currentTile.Enterable = true;
-                        }
+                        DoorTileEvents(currentTile, level);
                     }
                 }
+
                 UpdateVision(level);
             }
         }
-      
+
         private bool CanMove(int horizontalDirection, int verticalDirection, LevelMap level)
         {
             MapTile tileToCheck = level.Map[playerPositionVertically + verticalDirection, playerPositionHorizontally + horizontalDirection];
@@ -175,6 +125,89 @@ namespace Lab4
             }
 
             return false;
+        }
+
+        private void RoomTileEvents(RoomTile roomTile, LevelMap level)
+        {
+            if (roomTile.Monster)
+            {
+                roomTile.Monster = false;
+
+                bool hasWeapon = false;
+                foreach (Item item in inventory)
+                {
+                    if (item is Sword)
+                    {
+                        hasWeapon = true;
+                        Sword thisSword = (Sword)item;
+                        thisSword.Use(inventory);
+                        Console.WriteLine($"\n{name}: 'I fought a monster, and defeated him with my dank sword!'");
+                        Console.ReadKey();
+                        break;
+                    }
+                }
+
+                if (!hasWeapon)
+                {
+                    movesLeft--;
+                    Console.WriteLine($"\n{name}: 'I fought a monster, and now I lose a move. Very pain within me...'");
+                    Console.ReadKey();
+                }
+            }
+            else if (roomTile.Trap)
+            {
+                Console.WriteLine($"\n{name}: 'Uh-oh, I have walked upon a spooky trap! It costs me 1 extra move! Silly willy...'");
+                movesLeft--;
+                Console.ReadKey();
+            }
+            else if (roomTile.TrapSwitch)
+            {
+                DestroyTraps(level);
+            }
+            else if (roomTile.SuperKey)
+            {
+                foreach (Item item in inventory)
+                {
+                    if (item is Superkey)
+                    {
+                        Superkey thisSuperKey = (Superkey)item;
+                        thisSuperKey.CurrentCharges = 0;
+                        thisSuperKey.Use(inventory);
+                        break;
+                    }
+                }
+                Superkey newSuperKey = new Superkey();
+                inventory.Add(newSuperKey);
+                roomTile.SuperKey = false;
+            }
+            else if (roomTile.Weapon)
+            {
+                Sword sword = new Sword();
+                inventory.Add(sword);
+                roomTile.Weapon = false;
+            }
+        }
+
+        private void DoorTileEvents(MapTile currentTile, LevelMap level)
+        {
+            //Chooses superkey over regular key if available in inventory
+            bool superKeyFound = false;
+            foreach (Item item in inventory)
+            {
+                if (item is Superkey)
+                {
+                    superKeyFound = true;
+                    IUsable superKey = (IUsable)item;
+                    superKey.Use(inventory);
+                    currentTile.Enterable = true;
+                    break;
+                }
+            }
+            if (!superKeyFound && keys > 0)
+            {
+                keys--;
+                currentTile.Enterable = true;
+            }
         }
 
         public void UpdateVision(LevelMap level)

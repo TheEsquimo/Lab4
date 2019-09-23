@@ -92,7 +92,7 @@ namespace Lab4
                     }
                     else if(roomTile.Trap)
                     {
-                        Console.WriteLine($"\n{name}: 'You're making me me walk on a trap, it costs me 1 extra move! Silly willy...'");
+                        Console.WriteLine($"\n{name}: 'Uh-oh, I have walked upon a spooky trap! It costs me 1 extra move! Silly willy...'");
                         movesLeft--;
                         Console.ReadKey();
                     }
@@ -185,7 +185,7 @@ namespace Lab4
             }
             RoomTile currentRoomTile = (RoomTile)level.Map[playerPositionVertically, playerPositionHorizontally];
             currentRoomTile.TrapSwitch = false;
-            Console.WriteLine($"{name}: I've destroyed all the nearby traps with this hidden switch that I just found");
+            Console.WriteLine($"{name}: Wow! I make complete destroy of many traps within my reach. Extreme cool!");
             Console.ReadKey();
         }
 

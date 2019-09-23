@@ -12,6 +12,12 @@ namespace Lab4
             currentCharges = maxCharges;
         }
 
+        public int CurrentCharges
+        {
+            get { return currentCharges; }
+            set { currentCharges = value; }
+        }
+
         public void Use(List<Item> inventory)
         {
             currentCharges--;

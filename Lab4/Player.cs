@@ -77,8 +77,9 @@ namespace Lab4
                 playerPositionVertically += verticalDirection;
                 MapTile currentTile = level.Map[playerPositionVertically, playerPositionHorizontally];
                 currentTile.PlayerOnTile = true;
-                movesLeft --;
+                movesLeft--;
 
+                //Checks current tile to resolve effects
                 if (currentTile is RoomTile)
                 {
                     RoomTile roomTile = (RoomTile)currentTile;
@@ -102,6 +103,21 @@ namespace Lab4
                     else if (roomTile.TrapSwitch)
                     {
                         DestroyTraps(level);
+                    }
+                    else if (roomTile.SuperKey)
+                    {
+                        foreach(Item item in inventory)
+                        {
+                            if (item is Superkey)
+                            {
+                                Superkey thisSuperKey = (Superkey)item;
+                                thisSuperKey.CurrentCharges = 0;
+                                thisSuperKey.Use(inventory);
+                            }
+                        }
+                        Superkey superKey = new Superkey();
+                        inventory.Add(superKey);
+                        roomTile.SuperKey = false;
                     }
                 }
                 
@@ -191,7 +207,6 @@ namespace Lab4
             Console.WriteLine($"{name}: Wow! I make complete destroy of many traps within my reach. Extreme cool!");
             Console.ReadKey();
         }
-
 
         public void DisplayStats()
         {

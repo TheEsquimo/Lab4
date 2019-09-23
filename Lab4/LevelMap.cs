@@ -64,7 +64,7 @@ namespace Lab4
 
                         case 'K':
                             RoomTile roomWithSuperKey = new RoomTile();
-                            roomWithSuperKey.SuperKeys = 1;
+                            roomWithSuperKey.SuperKey = true;
                             generatedTile = roomWithSuperKey;
                             break;
 

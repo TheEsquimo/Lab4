@@ -5,8 +5,8 @@ namespace Lab4
     class RoomTile : MapTile
     {
         private int keys = 0;
-        private int superKeys = 0;
         private int gold = 0;
+        private bool superKey = false;
         private bool monster = false;
         private bool trap = false;
         private bool trapSwitch = false;
@@ -15,6 +15,7 @@ namespace Lab4
         {
             enterable = true;
         }
+
         override public char VisualRepresentationSymbol
         {
             get
@@ -30,8 +31,8 @@ namespace Lab4
                 if (PlayerOnTile) { visualRepresentationSymbol = '@'; }
                 else if (trap) { visualRepresentationSymbol = 'T'; }
                 else if (monster) { visualRepresentationSymbol = 'M'; }
-                else if (superKeys > 0) { visualRepresentationSymbol = 'S'; }
-                else if (keys > 0) { visualRepresentationSymbol = 'K'; }
+                else if (superKey) { visualRepresentationSymbol = 'K'; }
+                else if (keys > 0) { visualRepresentationSymbol = 'k'; }
                 else if (gold > 0) { visualRepresentationSymbol = '$'; }
                 else { visualRepresentationSymbol = '.'; }
         }
@@ -42,10 +43,10 @@ namespace Lab4
             set { keys = value; }
         }
 
-        public int SuperKeys
+        public bool SuperKey
         {
-            get { return superKeys; }
-            set { superKeys = value; }
+            get { return superKey; }
+            set { superKey = value; }
         }
 
         public int Gold
@@ -70,11 +71,13 @@ namespace Lab4
             get { return visible; }
             set { visible = value; }
         }
+
         public bool Trap
         {
             get { return trap;  }
             set { trap = value; }
         }
+
         public bool TrapSwitch
         {
             get { return trapSwitch; }

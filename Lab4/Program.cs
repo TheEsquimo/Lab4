@@ -41,7 +41,7 @@ namespace Lab4
 
                 while (player.MovesLeft > 0)
                 {
-                    
+                    Console.WriteLine(GameController.TilesExplanationMessage);
                     level.PrintMap();
                     player.DisplayStats();
 

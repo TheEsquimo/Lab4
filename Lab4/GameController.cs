@@ -22,34 +22,16 @@ namespace Lab4
         static string obstaclesExplanationMessage = "\n\nI need a key to unlock doors, I can do this with a normal key or a Superkey(that has several charges)" +
                                                     "\nIf you walk me to a tile that has a Monster or trap then I will get a move penalty." +
                                                     "\nIf I have a weapon then I can defeat the monster without a penalty. " +
-                                                    "\nIf there is a trap, then there is always a invisible switch nearby that deactivates it";
-        static string endMessage = ("Wow, you are mega lose guy!" +
-                                    "\nTry again!");
-
-        static int currentScore = 0;
-        static int highScore;
-        public static string EndMessage
-        {
-            get { return endMessage; }
-        }
-        public static string StartMessage
-        {
-            get { return startMessage; }
-        }
-        public static int CurrentScore
-        {
-            get { return currentScore; }
-            set { currentScore = value; }
-        }
+                                                    "\nIf there is a trap, then there is always a invisible switch nearby that deactivates it" +
+                                                    "\n\nPress any key to go back to the main menu";
+        static string loseMessage = "Wow, you are mega lose guy!" +
+                                    "\nTry again!";
+        static string winMessage = "Wow! I have become winner. It is very lucky for me for having won because I was bored in there and it is not best for me to be. Now I go home. Very cool!";
         public static GameState CurrentState
         {
             get { return currentState; }
+            set { currentState = value; }
         }
-        public static string TilesExplanationMessage
-        {
-            get { return tilesExplanationMessage; }
-        }
-
         public static void StartScreen()
         {
             System.Console.WriteLine(startMessage);
@@ -59,31 +41,37 @@ namespace Lab4
             {
                 case '1':
                     currentState = GameState.Play;
-                    return;
+                    break;
+
                 case '2':
                     Console.WriteLine(tilesExplanationMessage + obstaclesExplanationMessage);
                     Console.ReadKey();
                     Console.Clear();
                     break;
+
                 default:
-                    Console.WriteLine("\nInvalid input");
+                    Console.WriteLine("Invalid input");
                     Console.ReadKey();
                     Console.Clear();
                     StartScreen();
                     break;
             }
-            
         }
-        internal static void SetGameState(Player player)
+        internal static void EndScreen(Player player)
         {
-            if(player.MovesLeft < 1)
+            Console.Clear();
+            if (player.MovesLeft < 1)
             {
-                currentState = GameState.End;
+                Console.WriteLine(loseMessage);
             }
             else
             {
-                currentState = GameState.Start;
+                Console.WriteLine(winMessage);
             }
+            Console.ReadKey();
+            currentState = GameState.Start;
+            Console.Clear();
         }
+
     }
 }

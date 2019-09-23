@@ -13,7 +13,6 @@ namespace Lab4
             {'#', '.', 'S', '$', 'K', '$', '#' },
             {'#', '#', '#', '#', '#', '#', '#' }
         };
-
        
         const int playerMoves = 30;
         static LevelMap level = new LevelMap();

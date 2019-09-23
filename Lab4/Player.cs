@@ -64,7 +64,7 @@ namespace Lab4
                     break;
 
                 default:
-                    Console.WriteLine("\nInvalid input");
+                    Console.WriteLine($"\n{name}: Yo, my dude. You need to press the right keys and stuff...");
                     Console.ReadKey();
                     return;
             }

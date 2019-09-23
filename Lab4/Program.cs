@@ -38,10 +38,10 @@ namespace Lab4
                     Console.WriteLine();
                 }
                 */
+                GameController.StartScreen();
 
-                while (player.MovesLeft > 0)
+                while (GameController.CurrentState == GameController.GameState.Play)
                 {
-                    Console.WriteLine(GameController.TilesExplanationMessage);
                     level.PrintMap();
                     player.DisplayStats();
 

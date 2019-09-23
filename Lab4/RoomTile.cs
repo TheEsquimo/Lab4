@@ -5,6 +5,7 @@ namespace Lab4
     class RoomTile : MapTile
     {
         private int superKeys = 0;
+        private int gold = 0;
         private bool monster = false;
         
         public RoomTile()
@@ -40,6 +41,12 @@ namespace Lab4
         {
             get { return superKeys; }
             set { superKeys = value; }
+        }
+
+        public int Gold
+        {
+            get { return gold; }
+            set { gold = value; }
         }
 
         public bool Monster

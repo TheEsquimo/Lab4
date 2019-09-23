@@ -92,6 +92,7 @@ namespace Lab4
                     {
                         roomTile.Monster = false;
                         movesLeft--;
+                        Console.WriteLine($"\n{name}: 'I fought a monster, and now I lose a move. Very pain within me...'");
                         Console.ReadKey();
                     }
                     else if(roomTile.Trap)
@@ -210,9 +211,19 @@ namespace Lab4
 
         public void DisplayStats()
         {
-            System.Console.WriteLine("\nMoves left: " + movesLeft + 
+            System.Console.WriteLine("\n=====INVENTORY=====" +
+                                     "\nMoves left: " + movesLeft +
                                      "\nKeys left: " + keys +
                                      "\nGold: " + gold);
+
+            foreach(Item item in inventory)
+            {
+                if (item is IUsable)
+                {
+                    IUsable currentItem = (IUsable)item;
+                    Console.WriteLine($"{currentItem.ItemName} ({currentItem.CurrentCharges} charges left)");
+                }
+            }
         }
     }
 }

@@ -5,11 +5,17 @@ namespace Lab4
     class Superkey : Item, IUsable
     {
         const int maxCharges = 3;
+        const string itemName = "Superkey";
         private int currentCharges;
 
         public Superkey()
         {
             currentCharges = maxCharges;
+        }
+
+        public string ItemName
+        {
+            get { return itemName; }
         }
 
         public int CurrentCharges

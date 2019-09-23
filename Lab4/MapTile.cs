@@ -6,7 +6,6 @@
         protected bool playerOnTile = false;
         protected bool enterable = false;
         protected bool visible = false;
-        protected int keys = 0;
 
         virtual public bool Visible
         {
@@ -27,12 +26,6 @@
         {
             get {return playerOnTile; }
             set { playerOnTile = value; }            
-        }
-
-        virtual public int Keys
-        {
-            get { return keys; }
-            set { keys = value; }
         }
 
         virtual public bool Enterable

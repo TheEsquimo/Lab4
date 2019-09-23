@@ -4,6 +4,7 @@ namespace Lab4
 {
     class RoomTile : MapTile
     {
+        private int keys = 0;
         private int superKeys = 0;
         private int gold = 0;
         private bool monster = false;
@@ -31,10 +32,11 @@ namespace Lab4
                 else if (monster) { visualRepresentationSymbol = 'M'; }
                 else if (superKeys > 0) { visualRepresentationSymbol = 'S'; }
                 else if (keys > 0) { visualRepresentationSymbol = 'K'; }
+                else if (gold > 0) { visualRepresentationSymbol = '$'; }
                 else { visualRepresentationSymbol = '.'; }
         }
 
-        override public int Keys
+        public int Keys
         {
             get { return keys; }
             set { keys = value; }

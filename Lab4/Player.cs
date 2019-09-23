@@ -10,6 +10,7 @@ namespace Lab4
         int movesLeft;
         int maxMoves;
         int keys = 0;
+        int gold = 0;
 
         const string name = "TrueGuy";
         public List<Item> inventory = new List<Item>();
@@ -78,13 +79,15 @@ namespace Lab4
                 currentTile.PlayerOnTile = true;
                 movesLeft --;
 
-                keys += currentTile.Keys;
-                currentTile.Keys = 0;
-
                 if (currentTile is RoomTile)
                 {
                     RoomTile roomTile = (RoomTile)currentTile;
-                    if(roomTile.Monster)
+                    gold += roomTile.Gold;
+                    roomTile.Gold = 0;
+                    keys += roomTile.Keys;
+                    roomTile.Keys = 0;
+
+                    if (roomTile.Monster)
                     {
                         roomTile.Monster = false;
                         movesLeft--;
@@ -193,7 +196,8 @@ namespace Lab4
         public void DisplayStats()
         {
             System.Console.WriteLine("\nMoves left: " + movesLeft + 
-                                     "\nKeys left: " + keys);
+                                     "\nKeys left: " + keys +
+                                     "\nGold: " + gold);
         }
     }
 }

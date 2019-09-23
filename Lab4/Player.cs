@@ -60,6 +60,11 @@ namespace Lab4
                 case 'd':
                     horizontalDirection = 1;
                     break;
+
+                default:
+                    Console.WriteLine("\nInvalid input");
+                    Console.ReadKey();
+                    return;
             }
 
             if (CanMove(horizontalDirection, verticalDirection, level))

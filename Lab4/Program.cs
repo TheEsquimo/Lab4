@@ -19,53 +19,30 @@ namespace Lab4
 
         static void Main(string[] args)
         {
-            //Game Loop
+            Player player = new Player(playerMoves);
             while (true)
             {
-                Player player = new Player(playerMoves);
-                level.MapGeneration(charMap, player);
-                player.UpdateVision(level);
-
-                /*
-                //Print map as object types
-                for (int row = 0; row < level.Map.GetLength(0); row++)
+                if (GameController.CurrentState == GameController.GameState.Start)
                 {
-                    for (int column = 0; column < level.Map.GetLength(1); column++)
-                    {
-                        Console.Write(level.Map[row, column].GetType() + " ");
-                    }
-                    Console.WriteLine();
+                    player = new Player(playerMoves);
+                    level.MapGeneration(charMap, player);
+                    player.UpdateVision(level);
+                    GameController.StartScreen();
                 }
-                */
-                GameController.StartScreen();
-
-                while (GameController.CurrentState == GameController.GameState.Play)
+                else if (GameController.CurrentState == GameController.GameState.Play)
                 {
                     level.PrintMap();
                     player.DisplayStats();
-
                     char userInput = Console.ReadKey().KeyChar;
                     player.Move(userInput, level);
                     Console.Clear();
+                    if (player.MovesLeft < 1) { GameController.CurrentState = GameController.GameState.End; }
                 }
-
-                Console.Clear();
-
-                Console.WriteLine(GameController.EndMessage);
-                Console.ReadKey();
-            }
-
-            /*
-            //Print map as chars
-            for (int row = 0; row < charMap.GetLength(0); row++)
-            {
-                for (int column = 0; column < charMap.GetLength(1); column++)
+                else
                 {
-                    Console.Write(charMap[row, column]);
+                    GameController.EndScreen(player);
                 }
-                Console.WriteLine();
             }
-            */
         }
     }
 }

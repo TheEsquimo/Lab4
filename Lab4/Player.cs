@@ -114,10 +114,11 @@ namespace Lab4
                                 Superkey thisSuperKey = (Superkey)item;
                                 thisSuperKey.CurrentCharges = 0;
                                 thisSuperKey.Use(inventory);
+                                break;
                             }
                         }
-                        Superkey superKey = new Superkey();
-                        inventory.Add(superKey);
+                        Superkey newSuperKey = new Superkey();
+                        inventory.Add(newSuperKey);
                         roomTile.SuperKey = false;
                     }
                 }
@@ -146,7 +147,6 @@ namespace Lab4
                         }
                     }
                 }
-
                 UpdateVision(level);
             }
         }

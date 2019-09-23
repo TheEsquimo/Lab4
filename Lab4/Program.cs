@@ -9,11 +9,12 @@ namespace Lab4
             {'#', '#', '#', '#', '#', '#', '#' },
             {'#', 'K', '#', 'E', '.', '.', '#' },
             {'#', '.', '.', '#', 'D', '#', '#' },
-            {'#', '.', '@', '.', '.', '.', '#' },
-            {'#', '.', '.', '.', '.', '.', '#' },
+            {'#', '.', '@', 'T', '.', '.', '#' },
+            {'#', '.', 'S', '.', '.', '.', '#' },
             {'#', '#', '#', '#', '#', '#', '#' }
         };
 
+       
         const int playerMoves = 30;
         static LevelMap level = new LevelMap();
 
@@ -40,18 +41,18 @@ namespace Lab4
 
                 while (player.MovesLeft > 0)
                 {
-                    Console.Clear();
+                    
                     level.PrintMap();
                     player.DisplayStats();
 
                     char userInput = Console.ReadKey().KeyChar;
                     player.Move(userInput, level);
+                    Console.Clear();
                 }
 
                 Console.Clear();
 
-                Console.WriteLine("Wow, you are mega lose guy!" +
-                    "\nTry again!");
+                Console.WriteLine(GameController.EndMessage);
                 Console.ReadKey();
             }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lab4
 {
@@ -9,9 +10,11 @@ namespace Lab4
         int movesLeft;
         int maxMoves;
         int keys = 0;
-        const string name = "TrueGuy";
 
-        public Player(int moves)
+        const string name = "TrueGuy";
+        public List<Item> inventory = new List<Item>();
+
+        public Player(int moves = 1000)
         {
             maxMoves = moves;
             movesLeft = maxMoves;
@@ -59,6 +62,11 @@ namespace Lab4
                 case 'd':
                     horizontalDirection = 1;
                     break;
+
+                default:
+                    Console.WriteLine("\nInvalid input");
+                    Console.ReadKey();
+                    return;
             }
 
             if (CanMove(horizontalDirection, verticalDirection, level))
@@ -96,15 +104,57 @@ namespace Lab4
                 
                 if (currentTile is DoorTile)
                 {
-                    if (keys > 0 && !currentTile.Enterable)
+                    if (!currentTile.Enterable)
                     {
-                        keys--;
-                        currentTile.Enterable = true;
+                        //Chooses superkey over regular key if available in inventory
+                        bool superKeyFound = false;
+                        foreach (Item item in inventory)
+                        {
+                            if (item is Superkey)
+                            {
+                                superKeyFound = true;
+                                IUsable superKey = (IUsable)item;
+                                superKey.Use(inventory);
+                                currentTile.Enterable = true;
+                                break;
+                            }
+                        }
+                        if (!superKeyFound && keys > 0)
+                        {
+                            keys--;
+                            currentTile.Enterable = true;
+                        }
                     }
                 }
 
                 UpdateVision(level);
             }
+        }
+      
+        private bool CanMove(int horizontalDirection, int verticalDirection, LevelMap level)
+        {
+            MapTile tileToCheck = level.Map[playerPositionVertically + verticalDirection, playerPositionHorizontally + horizontalDirection];
+            if (tileToCheck.Enterable)
+            {
+                return true;
+            }
+            else if (tileToCheck is DoorTile)
+            {
+                if (keys > 0)
+                {
+                    return true;
+                }
+
+                foreach (Item item in inventory)
+                {
+                    if (item is Superkey)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         public void UpdateVision(LevelMap level)
@@ -138,25 +188,6 @@ namespace Lab4
             Console.WriteLine($"{name}: I've destroyed all the nearby traps with this hidden switch that I just found");
             Console.ReadKey();
         }
-
-        private bool CanMove(int horizontalDirection, int verticalDirection, LevelMap level)
-        {
-            MapTile tileToCheck = level.Map[playerPositionVertically + verticalDirection, playerPositionHorizontally + horizontalDirection];
-            if (tileToCheck.Enterable)
-            {
-                return true;
-            }
-            else if (tileToCheck is DoorTile)
-            {
-                if (keys > 0)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
 
 
         public void DisplayStats()

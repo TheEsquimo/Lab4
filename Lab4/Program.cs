@@ -14,8 +14,7 @@ namespace Lab4
             {'#', '#', '#', '#', '#', '#', '#' }
         };
 
-        GameController gameController = new GameController();
-
+       
         const int playerMoves = 30;
         static LevelMap level = new LevelMap();
 
@@ -53,8 +52,7 @@ namespace Lab4
 
                 Console.Clear();
 
-                Console.WriteLine("Wow, you are mega lose guy!" +
-                                  "\nTry again!");
+                Console.WriteLine(GameController.EndMessage);
                 Console.ReadKey();
             }
 

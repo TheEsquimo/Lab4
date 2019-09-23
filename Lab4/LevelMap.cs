@@ -50,10 +50,22 @@ namespace Lab4
                             generatedTile = roomExit;
                             break;
 
-                        case 'K':
+                        case '$':
+                            RoomTile roomWithGold = new RoomTile();
+                            roomWithGold.Gold = 10;
+                            generatedTile = roomWithGold;
+                            break;
+
+                        case 'k':
                             RoomTile roomWithKey = new RoomTile();
                             roomWithKey.Keys = 1;
                             generatedTile = roomWithKey;
+                            break;
+
+                        case 'K':
+                            RoomTile roomWithSuperKey = new RoomTile();
+                            roomWithSuperKey.SuperKey = true;
+                            generatedTile = roomWithSuperKey;
                             break;
 
                         case 'M':

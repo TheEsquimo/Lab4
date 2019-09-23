@@ -10,6 +10,7 @@ namespace Lab4
         int movesLeft;
         int maxMoves;
         int keys = 0;
+        int gold = 0;
 
         const string name = "TrueGuy";
         public List<Item> inventory = new List<Item>();
@@ -64,7 +65,7 @@ namespace Lab4
                     break;
 
                 default:
-                    Console.WriteLine("\nInvalid input");
+                    Console.WriteLine($"\n{name}: Yo, my dude. You need to press the right keys and stuff...");
                     Console.ReadKey();
                     return;
             }
@@ -76,15 +77,18 @@ namespace Lab4
                 playerPositionVertically += verticalDirection;
                 MapTile currentTile = level.Map[playerPositionVertically, playerPositionHorizontally];
                 currentTile.PlayerOnTile = true;
-                movesLeft --;
+                movesLeft--;
 
-                keys += currentTile.Keys;
-                currentTile.Keys = 0;
-
+                //Checks current tile to resolve effects
                 if (currentTile is RoomTile)
                 {
                     RoomTile roomTile = (RoomTile)currentTile;
-                    if(roomTile.Monster)
+                    gold += roomTile.Gold;
+                    roomTile.Gold = 0;
+                    keys += roomTile.Keys;
+                    roomTile.Keys = 0;
+
+                    if (roomTile.Monster)
                     {
                         roomTile.Monster = false;
                         movesLeft--;
@@ -92,13 +96,28 @@ namespace Lab4
                     }
                     else if(roomTile.Trap)
                     {
-                        Console.WriteLine($"\n{name}: 'You're making me me walk on a trap, it costs me 1 extra move! Silly willy...'");
+                        Console.WriteLine($"\n{name}: 'Uh-oh, I have walked upon a spooky trap! It costs me 1 extra move! Silly willy...'");
                         movesLeft--;
                         Console.ReadKey();
                     }
                     else if (roomTile.TrapSwitch)
                     {
                         DestroyTraps(level);
+                    }
+                    else if (roomTile.SuperKey)
+                    {
+                        foreach(Item item in inventory)
+                        {
+                            if (item is Superkey)
+                            {
+                                Superkey thisSuperKey = (Superkey)item;
+                                thisSuperKey.CurrentCharges = 0;
+                                thisSuperKey.Use(inventory);
+                            }
+                        }
+                        Superkey superKey = new Superkey();
+                        inventory.Add(superKey);
+                        roomTile.SuperKey = false;
                     }
                 }
                 
@@ -185,15 +204,15 @@ namespace Lab4
             }
             RoomTile currentRoomTile = (RoomTile)level.Map[playerPositionVertically, playerPositionHorizontally];
             currentRoomTile.TrapSwitch = false;
-            Console.WriteLine($"{name}: I've destroyed all the nearby traps with this hidden switch that I just found");
+            Console.WriteLine($"{name}: Wow! I make complete destroy of many traps within my reach. Extreme cool!");
             Console.ReadKey();
         }
-
 
         public void DisplayStats()
         {
             System.Console.WriteLine("\nMoves left: " + movesLeft + 
-                                     "\nKeys left: " + keys);
+                                     "\nKeys left: " + keys +
+                                     "\nGold: " + gold);
         }
     }
 }

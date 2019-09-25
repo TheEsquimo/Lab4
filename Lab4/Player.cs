@@ -191,7 +191,7 @@ namespace Lab4
                 }
                 Superkey newSuperKey = new Superkey();
                 inventory.Add(newSuperKey);
-                Console.WriteLine($"{name}: I found a {newSuperKey.ItemName}");
+                Console.WriteLine($"\n{name}: I found a {newSuperKey.ItemName}");
                 Console.ReadKey();
                 roomTile.SuperKey = false;
             }
@@ -199,9 +199,23 @@ namespace Lab4
             {
                 Sword sword = new Sword();
                 inventory.Add(sword);
-                Console.WriteLine($"{name}: I found a {sword.ItemName}");
+                Console.WriteLine($"\n{name}: I found a {sword.ItemName}");
                 Console.ReadKey();
                 roomTile.Weapon = false;
+            }
+            else if (roomTile.Compass)
+            {
+                roomTile.Compass = false;
+                foreach(MapTile mapTile in level.Map)
+                {
+                    if (mapTile is ExitTile)
+                    {
+                        mapTile.Visible = true;
+                        Console.WriteLine($"\n{name}: Wow, I found a compass! Now I can see where the exit is!");
+                        Console.ReadKey();
+                        break;
+                    }
+                }
             }
         }
 

@@ -24,7 +24,7 @@ namespace Lab4
             currentCharges--;
             if (currentCharges <= 0)
             {
-                System.Console.WriteLine($"\nMy {itemName} broke!");
+                System.Console.WriteLine($"\nThe {itemName} broke!");
                 inventory.Remove(this);
                 Console.ReadKey();
             }

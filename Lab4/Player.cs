@@ -149,8 +149,8 @@ namespace Lab4
                     {
                         hasWeapon = true;
                         Sword thisSword = (Sword)item;
-                        thisSword.Use(inventory);
                         Console.WriteLine($"\n{name}: 'I fought a monster, and defeated him with my dank sword!'");
+                        thisSword.Use(inventory);
                         Console.ReadKey();
                         break;
                     }

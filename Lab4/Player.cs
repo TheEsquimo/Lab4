@@ -87,12 +87,7 @@ namespace Lab4
                 //Checks current tile to resolve effects
                 if (currentTile is RoomTile)
                 {
-                    RoomTile roomTile = (RoomTile)currentTile;
-                    gold += roomTile.Gold;
-                    roomTile.Gold = 0;
-                    keys += roomTile.Keys;
-                    roomTile.Keys = 0;
-                    RoomTileEvents(roomTile, level);
+                    RoomTileEvents((RoomTile)currentTile, level);
                 }
                 else if (currentTile is DoorTile)
                 {
@@ -123,6 +118,10 @@ namespace Lab4
                 {
                     return true;
                 }
+                else
+                {
+                    Console.WriteLine($"{name}: I need a key for this...");
+                }
 
                 foreach (Item item in inventory)
                 {
@@ -138,6 +137,11 @@ namespace Lab4
 
         private void RoomTileEvents(RoomTile roomTile, LevelMap level)
         {
+            gold += roomTile.Gold;
+            roomTile.Gold = 0;
+            keys += roomTile.Keys;
+            roomTile.Keys = 0;
+
             if (roomTile.Monster)
             {
                 roomTile.Monster = false;
@@ -187,12 +191,16 @@ namespace Lab4
                 }
                 Superkey newSuperKey = new Superkey();
                 inventory.Add(newSuperKey);
+                Console.WriteLine($"{name}: I found a {newSuperKey.ItemName}");
+                Console.ReadKey();
                 roomTile.SuperKey = false;
             }
             else if (roomTile.Weapon)
             {
                 Sword sword = new Sword();
                 inventory.Add(sword);
+                Console.WriteLine($"{name}: I found a {sword.ItemName}");
+                Console.ReadKey();
                 roomTile.Weapon = false;
             }
         }
@@ -247,7 +255,7 @@ namespace Lab4
             }
             RoomTile currentRoomTile = (RoomTile)level.Map[playerPositionVertically, playerPositionHorizontally];
             currentRoomTile.TrapSwitch = false;
-            Console.WriteLine($"{name}: Wow! I make complete destroy of many traps within my reach. Extreme cool!");
+            Console.WriteLine($"\n{name}: Wow! I make complete destroy of many traps within my reach. Extreme cool!");
             Console.ReadKey();
         }
 

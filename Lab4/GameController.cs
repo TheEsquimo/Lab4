@@ -24,8 +24,8 @@ namespace Lab4
 
         const string tilesExplanationMessage = "Use WASD to move me around the map. There are tiles on the map that represent different things.\n" +
                                             "\n'@': Das me dawg    '#': Wall    '.': Empty room     'D': Door" +
-                                            "\n'k': Normal key    'E': Exit    'K': Superkey       " +
-                                            "\n'M': Monster        'T': Trap    'W': Sword         '$': Gold";
+                                            "\n'k': Normal key     'E': Exit    'K': Superkey       'C': Compass" +
+                                            "\n'M': Monster        'T': Trap    'W': Sword          '$': Gold";
 
         const string obstaclesExplanationMessage = "\n\nI need a key to unlock doors, I can do this with a normal key or a Superkey (A key with several charges)" +
                                                     "\nIf you walk me to a tile that has a monster or trap on it, I will get a move penalty." +

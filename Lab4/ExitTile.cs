@@ -8,7 +8,6 @@ namespace Lab4
     {
         public ExitTile()
         {
-            visible = true;
             enterable = true;
             visualRepresentationSymbol = 'E';
         }

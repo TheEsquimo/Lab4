@@ -87,12 +87,7 @@ namespace Lab4
                 //Checks current tile to resolve effects
                 if (currentTile is RoomTile)
                 {
-                    RoomTile roomTile = (RoomTile)currentTile;
-                    gold += roomTile.Gold;
-                    roomTile.Gold = 0;
-                    keys += roomTile.Keys;
-                    roomTile.Keys = 0;
-                    RoomTileEvents(roomTile, level);
+                    RoomTileEvents((RoomTile)currentTile, level);
                 }
                 else if (currentTile is DoorTile)
                 {
@@ -123,6 +118,10 @@ namespace Lab4
                 {
                     return true;
                 }
+                else
+                {
+                    Console.WriteLine($"{name}: I need a key for this...");
+                }
 
                 foreach (Item item in inventory)
                 {
@@ -138,6 +137,11 @@ namespace Lab4
 
         private void RoomTileEvents(RoomTile roomTile, LevelMap level)
         {
+            gold += roomTile.Gold;
+            roomTile.Gold = 0;
+            keys += roomTile.Keys;
+            roomTile.Keys = 0;
+
             if (roomTile.Monster)
             {
                 roomTile.Monster = false;
@@ -149,8 +153,8 @@ namespace Lab4
                     {
                         hasWeapon = true;
                         Sword thisSword = (Sword)item;
-                        thisSword.Use(inventory);
                         Console.WriteLine($"\n{name}: 'I fought a monster, and defeated him with my dank sword!'");
+                        thisSword.Use(inventory);
                         Console.ReadKey();
                         break;
                     }
@@ -187,13 +191,31 @@ namespace Lab4
                 }
                 Superkey newSuperKey = new Superkey();
                 inventory.Add(newSuperKey);
+                Console.WriteLine($"\n{name}: I found a {newSuperKey.ItemName}");
+                Console.ReadKey();
                 roomTile.SuperKey = false;
             }
             else if (roomTile.Weapon)
             {
                 Sword sword = new Sword();
                 inventory.Add(sword);
+                Console.WriteLine($"\n{name}: I found a {sword.ItemName}");
+                Console.ReadKey();
                 roomTile.Weapon = false;
+            }
+            else if (roomTile.Compass)
+            {
+                roomTile.Compass = false;
+                foreach(MapTile mapTile in level.Map)
+                {
+                    if (mapTile is ExitTile)
+                    {
+                        mapTile.Visible = true;
+                        Console.WriteLine($"\n{name}: Wow, I found a compass! Now I can see where the exit is!");
+                        Console.ReadKey();
+                        break;
+                    }
+                }
             }
         }
 
@@ -247,7 +269,7 @@ namespace Lab4
             }
             RoomTile currentRoomTile = (RoomTile)level.Map[playerPositionVertically, playerPositionHorizontally];
             currentRoomTile.TrapSwitch = false;
-            Console.WriteLine($"{name}: Wow! I make complete destroy of many traps within my reach. Extreme cool!");
+            Console.WriteLine($"\n{name}: Wow! I make complete destroy of many traps within my reach. Extreme cool!");
             Console.ReadKey();
         }
 

@@ -11,6 +11,7 @@ namespace Lab4
         private bool trap = false;
         private bool trapSwitch = false;
         private bool weapon = false;
+        private bool compass = false;
         
         public RoomTile()
         {
@@ -35,6 +36,7 @@ namespace Lab4
                 else if (superKey) { visualRepresentationSymbol = 'K'; }
                 else if (keys > 0) { visualRepresentationSymbol = 'k'; }
                 else if (weapon) { visualRepresentationSymbol = 'W'; }
+                else if (compass) { visualRepresentationSymbol = 'C'; }
                 else if (gold > 0) { visualRepresentationSymbol = '$'; }
                 else { visualRepresentationSymbol = '.'; }
         }
@@ -61,6 +63,12 @@ namespace Lab4
         {
             get { return monster; }
             set { monster = value; }
+        }
+
+        public bool Compass
+        {
+            get { return compass; }
+            set { compass = value; }
         }
 
         override public bool Enterable

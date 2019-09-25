@@ -41,6 +41,12 @@ namespace Lab4
                             player.PlayerPositionVertically = row;
                             break;
 
+                        case 'C':
+                            RoomTile roomWithCompass = new RoomTile();
+                            roomWithCompass.Compass = true;
+                            generatedTile = roomWithCompass;
+                            break;
+
                         case 'D':
                             generatedTile = new DoorTile();
                             break;

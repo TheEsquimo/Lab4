@@ -27,6 +27,11 @@ namespace Lab4
             set { movesLeft = value; }
         }
 
+        public int Gold
+        {
+            get { return gold; }
+        }
+
         public int PlayerPositionHorizontally
         {
             get { return playerPositionHorizontally; }
@@ -95,6 +100,10 @@ namespace Lab4
                     {
                         DoorTileEvents(currentTile, level);
                     }
+                }
+                else if (currentTile is ExitTile)
+                {
+                    GameController.CurrentState = GameController.GameState.End;
                 }
 
                 UpdateVision(level);

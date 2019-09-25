@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Lab4
 {
@@ -21,12 +22,12 @@ namespace Lab4
         public void Use(List<Item> inventory)
         {
             currentCharges--;
-            if (currentCharges <= 0) { Destroy(inventory); }
-        }
-
-        public void Destroy(List<Item> inventory)
-        {
-            inventory.Remove(this);
+            if (currentCharges <= 0)
+            {
+                System.Console.WriteLine($"My {itemName} broke!");
+                inventory.Remove(this);
+                Console.ReadKey();
+            }
         }
     }
 }

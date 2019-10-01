@@ -56,20 +56,3 @@ Console.BackgroundColor, Console.ForegroundColor, Console.ResetColor
 =====FRÅGOR TILL PONTUS=====
 
 =====TO-DO=====
-* Implement some kind of interface -DONE-
-* Triggers: -DONE-
-   * traps: move penalty
-   * switches (invisble, takes out nearby traps)
-   
-* Items
-   * Superkeys: several charge keys (can only hold one. Trying to pick up a new one replaces the old one) -DONE-
-   * Weapon: one-use weapon that takes out a monster without taking a movement penalty
-   * Gold: gives extra points
-   * Extra moves pick-up
-   * Torch: see switches
-   
-* static class GameController
-   * States: win, lose, play (better name?)
-   * StartMessage, WinMessage, LoseMessage
-   * Current score
-   * High-score

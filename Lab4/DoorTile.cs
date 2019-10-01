@@ -6,6 +6,7 @@
         {
             visualRepresentationSymbol = 'D';
         }
+
         override public bool Enterable
         {
             get { return enterable; }

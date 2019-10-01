@@ -243,8 +243,6 @@ namespace Lab4
 
         public void UpdateVision(LevelMap level)
         {
-            //Reveals tiles on and around player's current position
-
             for (int column = playerPositionVertically - 1; column <= playerPositionVertically + 1; column++)
             {
                 for(int row = playerPositionHorizontally - 1; row <= playerPositionHorizontally + 1; row++)

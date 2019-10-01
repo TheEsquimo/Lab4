@@ -2,10 +2,10 @@
 {
     class DoorTile : MapTile
     {
-        private char visualRepresentationSymbol = 'D';
-        private bool enterable = false;
-        private bool visible = false;
-
+        public DoorTile()
+        {
+            visualRepresentationSymbol = 'D';
+        }
         override public bool Enterable
         {
             get { return enterable; }

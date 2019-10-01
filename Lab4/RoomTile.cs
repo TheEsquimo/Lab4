@@ -5,12 +5,18 @@ namespace Lab4
     class RoomTile : MapTile
     {
         private int keys = 0;
-        private int superKeys = 0;
+        private int gold = 0;
+        private bool superKey = false;
         private bool monster = false;
-        private bool exit = false;
-        private bool enterable = true;
-        private bool visible = false;
-        private char visualRepresentationSymbol;
+        private bool trap = false;
+        private bool trapSwitch = false;
+        private bool weapon = false;
+        private bool compass = false;
+        
+        public RoomTile()
+        {
+            enterable = true;
+        }
 
         override public char VisualRepresentationSymbol
         {
@@ -25,23 +31,32 @@ namespace Lab4
         private void UpdateVisualRepresentationSymbol()
         {
                 if (PlayerOnTile) { visualRepresentationSymbol = '@'; }
-                else if (exit) { visualRepresentationSymbol = 'E'; }
+                else if (trap) { visualRepresentationSymbol = 'T'; }
                 else if (monster) { visualRepresentationSymbol = 'M'; }
-                else if (superKeys > 0) { visualRepresentationSymbol = 'S'; }
-                else if (keys > 0) { visualRepresentationSymbol = 'K'; }
+                else if (superKey) { visualRepresentationSymbol = 'K'; }
+                else if (keys > 0) { visualRepresentationSymbol = 'k'; }
+                else if (weapon) { visualRepresentationSymbol = 'W'; }
+                else if (compass) { visualRepresentationSymbol = 'C'; }
+                else if (gold > 0) { visualRepresentationSymbol = '$'; }
                 else { visualRepresentationSymbol = '.'; }
         }
 
-        override public int Keys
+        public int Keys
         {
             get { return keys; }
             set { keys = value; }
         }
 
-        public int SuperKeys
+        public bool SuperKey
         {
-            get { return superKeys; }
-            set { superKeys = value; }
+            get { return superKey; }
+            set { superKey = value; }
+        }
+
+        public int Gold
+        {
+            get { return gold; }
+            set { gold = value; }
         }
 
         public bool Monster
@@ -50,10 +65,10 @@ namespace Lab4
             set { monster = value; }
         }
 
-        public bool Exit
+        public bool Compass
         {
-            get { return exit; }
-            set { exit = value; }
+            get { return compass; }
+            set { compass = value; }
         }
 
         override public bool Enterable
@@ -65,6 +80,24 @@ namespace Lab4
         {
             get { return visible; }
             set { visible = value; }
+        }
+
+        public bool Trap
+        {
+            get { return trap;  }
+            set { trap = value; }
+        }
+
+        public bool TrapSwitch
+        {
+            get { return trapSwitch; }
+            set { trapSwitch = value; }
+        }
+
+        public bool Weapon
+        {
+            get { return weapon; }
+            set { weapon = value; }
         }
     }
 }

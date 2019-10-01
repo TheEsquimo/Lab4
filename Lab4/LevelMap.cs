@@ -41,20 +41,37 @@ namespace Lab4
                             player.PlayerPositionVertically = row;
                             break;
 
+                        case 'C':
+                            RoomTile roomWithCompass = new RoomTile();
+                            roomWithCompass.Compass = true;
+                            generatedTile = roomWithCompass;
+                            break;
+
                         case 'D':
                             generatedTile = new DoorTile();
                             break;
 
                         case 'E':
-                            RoomTile roomExit = new RoomTile();
-                            roomExit.Exit = true;
+                            ExitTile roomExit = new ExitTile();
                             generatedTile = roomExit;
                             break;
 
-                        case 'K':
+                        case '$':
+                            RoomTile roomWithGold = new RoomTile();
+                            roomWithGold.Gold = 10;
+                            generatedTile = roomWithGold;
+                            break;
+
+                        case 'k':
                             RoomTile roomWithKey = new RoomTile();
                             roomWithKey.Keys = 1;
                             generatedTile = roomWithKey;
+                            break;
+
+                        case 'K':
+                            RoomTile roomWithSuperKey = new RoomTile();
+                            roomWithSuperKey.SuperKey = true;
+                            generatedTile = roomWithSuperKey;
                             break;
 
                         case 'M':
@@ -63,11 +80,28 @@ namespace Lab4
                             generatedTile = roomWithMonster;
                             break;
 
+                        case 'T':
+                            RoomTile roomWithTrap = new RoomTile();
+                            roomWithTrap.Trap = true;
+                            generatedTile = roomWithTrap;
+                            break;
+
+                        case 'S':
+                            RoomTile roomWithTrapSwitch = new RoomTile();
+                            roomWithTrapSwitch.TrapSwitch = true;
+                            generatedTile = roomWithTrapSwitch;
+                            break;
+
+                        case 'W':
+                            RoomTile roomWithWeapon = new RoomTile();
+                            roomWithWeapon.Weapon = true;
+                            generatedTile = roomWithWeapon;
+                            break;
+
                         default:
                             generatedTile = new RoomTile();
                             break;
                     }
-
                     map[row, column] = generatedTile;
                 }
             }

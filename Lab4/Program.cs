@@ -6,66 +6,49 @@ namespace Lab4
     {
         static char[,] charMap = new char[,]
         {
-            {'#', '#', '#', '#', '#', '#', '#' },
-            {'#', 'K', '#', 'E', '.', '.', '#' },
-            {'#', '.', '.', '#', 'D', '#', '#' },
-            {'#', '.', '@', '.', '.', '.', '#' },
-            {'#', '.', '.', '.', '.', '.', '#' },
-            {'#', '#', '#', '#', '#', '#', '#' }
+            {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#',},
+            {'#', 'k', '#', '$', '$', 'K', '#', '$', '$', '$', 'D', '$', '#', 'E', '#', '#',},
+            {'#', '.', '.', '#', 'D', '#', '#', '#', '$', '$', '#', '$', 'T', 'T', 'T', '#',},
+            {'#', 'M', '.', '@', '.', 'M', 'D', '.', 'D', 'W', '#', '$', 'T', 'S', 'T', '#',},
+            {'#', '$', '#', 'W', '.', '.', '#', '.', '#', '#', '#', '.', 'T', '.', 'T', '#',},
+            {'#', 'D', '#', '#', '#', '#', '#', '.', 'D', 'M', '#', '.', '.', '$', '.', '#',},
+            {'#', '$', '$', '$', '.', '$', '.', '.', '#', '$', '#', '.', '.', '.', '.', '#',},
+            {'#', 'S', 'T', '.', '$', '.', '$', 'k', '$', '#', '#', '#', 'D', '#', 'M', '#',},
+            {'#', 'T', '#', '#', '#', '#', '#', '#', '$', '.', '.', 'D', '$', '#', '.', '#',},
+            {'#', 'C', '$', '#', '$', 'W', '$', 'M', '$', '$', '$', '.', '#', '#', '$', '#',},
+            {'#', '$', '$', 'D', 'M', '$', '.', 'M', '.', '.', '.', '.', 'M', '$', 'K', '#',},
+            {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#',}
         };
-
-        const int playerMoves = 30;
+       
+        const int playerMoves = 300;
         static LevelMap level = new LevelMap();
 
         static void Main(string[] args)
         {
-            //Game Loop
+            Player player = new Player(playerMoves);
             while (true)
             {
-                Player player = new Player(playerMoves);
-                level.MapGeneration(charMap, player);
-                player.UpdateVision(level);
-
-                /*
-                //Print map as object types
-                for (int row = 0; row < level.Map.GetLength(0); row++)
+                if (GameController.CurrentState == GameController.GameState.Start)
                 {
-                    for (int column = 0; column < level.Map.GetLength(1); column++)
-                    {
-                        Console.Write(level.Map[row, column].GetType() + " ");
-                    }
-                    Console.WriteLine();
+                    player = new Player(playerMoves);
+                    level.MapGeneration(charMap, player);
+                    player.UpdateVision(level);
+                    GameController.StartScreen();
                 }
-                */
-
-                while (player.MovesLeft > 0)
+                else if (GameController.CurrentState == GameController.GameState.Play)
                 {
-                    Console.Clear();
                     level.PrintMap();
                     player.DisplayStats();
-
                     char userInput = Console.ReadKey().KeyChar;
                     player.Move(userInput, level);
+                    Console.Clear();
+                    if (player.MovesLeft < 1) { GameController.CurrentState = GameController.GameState.End; }
                 }
-
-                Console.Clear();
-
-                Console.WriteLine("Wow, you are mega lose guy!" +
-                    "\nTry again!");
-                Console.ReadKey();
-            }
-
-            /*
-            //Print map as chars
-            for (int row = 0; row < charMap.GetLength(0); row++)
-            {
-                for (int column = 0; column < charMap.GetLength(1); column++)
+                else if (GameController.CurrentState == GameController.GameState.End)
                 {
-                    Console.Write(charMap[row, column]);
+                    GameController.EndScreen(player);
                 }
-                Console.WriteLine();
             }
-            */
         }
     }
 }

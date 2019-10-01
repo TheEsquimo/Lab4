@@ -28,6 +28,13 @@ namespace Lab4
                     {
                         case '#':
                             generatedTile = new WallTile();
+                            if (row == 0 
+                            || row == mapSizeY - 1
+                            || column == 0 
+                            || column == mapSizeX - 1)
+                            {
+                                generatedTile.Visible = true;
+                            }
                             break;
 
                         case '.':

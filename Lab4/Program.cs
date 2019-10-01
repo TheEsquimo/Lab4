@@ -4,6 +4,14 @@ namespace Lab4
 {
     class Program
     {
+        /*
+            HIGHSCORES:
+            Tony: 606
+            Kurt: 604
+            Mikael: 588
+            
+        */
+
         static char[,] charMap = new char[,]
         {
             {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#',},

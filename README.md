@@ -1,5 +1,6 @@
 # Lab4
 Elvis Sahlén &amp; Luna Lindh's Lab4
+A two-person group school assignment to make a console-based game in C# .NET. Meant to show understanding of how to structure a project with classes and objects, as well as creative solutions to implement specific gameplay features.
 
 =====CLASSES=====
 * Properties should always be private when possible. Use get, set
